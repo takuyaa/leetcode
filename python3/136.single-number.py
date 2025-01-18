@@ -59,17 +59,10 @@
 # @lc code=start
 class Solution:
     def singleNumber(self, nums: list[int]) -> int:
-        bit_vector: list[bool] = [False] * 60001
+        res: int = 0
         for num in nums:
-            index = num + 30000
-            if bit_vector[index]:
-                bit_vector[index] = False
-            else:
-                bit_vector[index] = True
-        for index, bit in enumerate(bit_vector):
-            if bit:
-                return index - 30000
-        raise Exception
+            res ^= num
+        return res
 
 
 # @lc code=end
