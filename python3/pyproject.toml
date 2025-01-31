@@ -11,3 +11,6 @@ dev-dependencies = [
     "pyright>=1.1.392.post0",
     "ruff>=0.8.5",
 ]
+
+[tool.ruff.lint]
+ignore = ["E741"]
