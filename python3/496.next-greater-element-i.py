@@ -69,14 +69,14 @@
 class Solution:
     def nextGreaterElement(self, nums1: list[int], nums2: list[int]) -> list[int]:
         ans: list[int] = [-1] * len(nums1)
-        indices: dict[int, int] = {num: i for i, num in enumerate(nums2)}
+        indices: dict[int, int] = {num: i for i, num in enumerate(nums1)}
 
-        for i1, num1 in enumerate(nums1):
-            i2: int = indices[num1]
-            for num2 in nums2[(i2 + 1) :]:
-                if num1 < num2:
-                    ans[i1] = num2
-                    break
+        stack: list[int] = []
+        for i, num in enumerate(nums2):
+            while len(stack) > 0 and nums2[stack[-1]] < num:
+                if (idx := indices.get(nums2[stack.pop()])) is not None:
+                    ans[idx] = num
+            stack.append(i)
 
         return ans
 
